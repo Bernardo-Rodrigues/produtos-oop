@@ -1,4 +1,5 @@
 import Item from "./Item";
+import TaxItem from "./TaxItem";
 
 export default class Order {
   items: Item[];
@@ -17,14 +18,8 @@ export default class Order {
   }
   getTaxes() {
     return this.items.reduce((acc, cur) => {
-      return acc + cur.price * taxes[cur.category];
+      const taxItem = new TaxItem(cur);
+      return acc + taxItem.calculateTax();
     }, 0);
   }
 }
-
-const taxes = {
-  Beer: 0.2,
-  Cigar: 0.25,
-  Eletronics: 0.3,
-  Water: 0,
-};
