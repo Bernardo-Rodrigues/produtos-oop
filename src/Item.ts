@@ -1,10 +1,8 @@
-export default class Item {
-  category: string;
+export default abstract class Item {
   description: string;
   price: number;
 
-  constructor(category: string, description: string, price: number) {
-    this.category = category;
+  constructor(description: string, price: number) {
     this.description = description;
     this.price = price;
   }

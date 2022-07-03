@@ -1,5 +1,7 @@
+import Beer from "./Beer";
+import Cigar from "./Cigar";
+import Eletronics from "./Eletronics";
 import Item from "./Item";
-import TaxItem from "./TaxItem";
 
 export default class Order {
   items: Item[];
@@ -18,8 +20,13 @@ export default class Order {
   }
   getTaxes() {
     return this.items.reduce((acc, cur) => {
-      const taxItem = new TaxItem(cur);
-      return acc + taxItem.calculateTax();
+      if (
+        cur instanceof Beer ||
+        cur instanceof Cigar ||
+        cur instanceof Eletronics
+      )
+        return acc + cur.calculateTax();
+      else return acc;
     }, 0);
   }
 }
